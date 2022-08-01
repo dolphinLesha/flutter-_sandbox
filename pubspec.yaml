@@ -1,0 +1,59 @@
+name: flutter_sandbox
+description: Epic Sandbox with Flutter
+
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.17.5 <3.0.0"
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  flutter_redux: ^0.10.0
+  redux: ^5.0.0
+  get_it: ^7.2.0
+  json_annotation: ^4.5.0
+  freezed_annotation: ^2.0.3
+  flutter_bloc: ^8.0.1
+  equatable: ^2.0.3
+  syncfusion_flutter_datepicker: ^20.1.61
+  cupertino_icons: ^1.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+  build_runner: ^2.1.11
+  freezed: ^2.0.3+1
+  json_serializable: ^6.2.0
+
+
+flutter:
+  uses-material-design: true
+
+
+  fonts:
+    - family: VictorMono-Thin
+      fonts:
+        - asset: assets/fonts/VictorMono/VictorMono-Thin.otf
+    - family: VictorMono-Thin-Italic
+      fonts:
+        - asset: assets/fonts/VictorMono/VictorMono-Italic.otf
+    - family: VictorMono-Regular
+      fonts:
+        - asset: assets/fonts/VictorMono/VictorMono-Regular.otf
+    - family: VictorMono-SemiBold
+      fonts:
+        - asset: assets/fonts/VictorMono/VictorMono-SemiBold.otf
+    - family: VictorMono-Bold
+      fonts:
+          - asset: assets/fonts/VictorMono/VictorMono-Bold.otf
+    - family: VictorMono-Medium
+      fonts:
+          - asset: assets/fonts/VictorMono/VictorMono-Medium.otf
