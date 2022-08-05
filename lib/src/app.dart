@@ -16,9 +16,11 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(store.state.themeState.currentTheme);
     return StoreProvider(
       store: store,
       child: MaterialApp.router(
+        theme: store.state.themeState.currentTheme ?? ThemeData(),
         routeInformationParser: AppRouteInformationParser(),
         routerDelegate: AppRouterDelegate(store),
         backButtonDispatcher: RootBackButtonDispatcher(),

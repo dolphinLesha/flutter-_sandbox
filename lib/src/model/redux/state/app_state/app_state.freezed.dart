@@ -18,6 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AppState {
   @JsonKey()
   NavigationState get navigationState => throw _privateConstructorUsedError;
+  @JsonKey()
+  ThemeState get themeState => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AppStateCopyWith<AppState> get copyWith =>
@@ -28,9 +30,12 @@ mixin _$AppState {
 abstract class $AppStateCopyWith<$Res> {
   factory $AppStateCopyWith(AppState value, $Res Function(AppState) then) =
       _$AppStateCopyWithImpl<$Res>;
-  $Res call({@JsonKey() NavigationState navigationState});
+  $Res call(
+      {@JsonKey() NavigationState navigationState,
+      @JsonKey() ThemeState themeState});
 
   $NavigationStateCopyWith<$Res> get navigationState;
+  $ThemeStateCopyWith<$Res> get themeState;
 }
 
 /// @nodoc
@@ -44,12 +49,17 @@ class _$AppStateCopyWithImpl<$Res> implements $AppStateCopyWith<$Res> {
   @override
   $Res call({
     Object? navigationState = freezed,
+    Object? themeState = freezed,
   }) {
     return _then(_value.copyWith(
       navigationState: navigationState == freezed
           ? _value.navigationState
           : navigationState // ignore: cast_nullable_to_non_nullable
               as NavigationState,
+      themeState: themeState == freezed
+          ? _value.themeState
+          : themeState // ignore: cast_nullable_to_non_nullable
+              as ThemeState,
     ));
   }
 
@@ -57,6 +67,13 @@ class _$AppStateCopyWithImpl<$Res> implements $AppStateCopyWith<$Res> {
   $NavigationStateCopyWith<$Res> get navigationState {
     return $NavigationStateCopyWith<$Res>(_value.navigationState, (value) {
       return _then(_value.copyWith(navigationState: value));
+    });
+  }
+
+  @override
+  $ThemeStateCopyWith<$Res> get themeState {
+    return $ThemeStateCopyWith<$Res>(_value.themeState, (value) {
+      return _then(_value.copyWith(themeState: value));
     });
   }
 }
@@ -67,10 +84,14 @@ abstract class _$$_AppStateCopyWith<$Res> implements $AppStateCopyWith<$Res> {
           _$_AppState value, $Res Function(_$_AppState) then) =
       __$$_AppStateCopyWithImpl<$Res>;
   @override
-  $Res call({@JsonKey() NavigationState navigationState});
+  $Res call(
+      {@JsonKey() NavigationState navigationState,
+      @JsonKey() ThemeState themeState});
 
   @override
   $NavigationStateCopyWith<$Res> get navigationState;
+  @override
+  $ThemeStateCopyWith<$Res> get themeState;
 }
 
 /// @nodoc
@@ -86,12 +107,17 @@ class __$$_AppStateCopyWithImpl<$Res> extends _$AppStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? navigationState = freezed,
+    Object? themeState = freezed,
   }) {
     return _then(_$_AppState(
       navigationState: navigationState == freezed
           ? _value.navigationState
           : navigationState // ignore: cast_nullable_to_non_nullable
               as NavigationState,
+      themeState: themeState == freezed
+          ? _value.themeState
+          : themeState // ignore: cast_nullable_to_non_nullable
+              as ThemeState,
     ));
   }
 }
@@ -100,15 +126,19 @@ class __$$_AppStateCopyWithImpl<$Res> extends _$AppStateCopyWithImpl<$Res>
 
 class _$_AppState implements _AppState {
   const _$_AppState(
-      {@JsonKey() this.navigationState = const NavigationState()});
+      {@JsonKey() this.navigationState = const NavigationState(),
+      @JsonKey() this.themeState = const ThemeState()});
 
   @override
   @JsonKey()
   final NavigationState navigationState;
+  @override
+  @JsonKey()
+  final ThemeState themeState;
 
   @override
   String toString() {
-    return 'AppState(navigationState: $navigationState)';
+    return 'AppState(navigationState: $navigationState, themeState: $themeState)';
   }
 
   @override
@@ -117,12 +147,16 @@ class _$_AppState implements _AppState {
         (other.runtimeType == runtimeType &&
             other is _$_AppState &&
             const DeepCollectionEquality()
-                .equals(other.navigationState, navigationState));
+                .equals(other.navigationState, navigationState) &&
+            const DeepCollectionEquality()
+                .equals(other.themeState, themeState));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(navigationState));
+      runtimeType,
+      const DeepCollectionEquality().hash(navigationState),
+      const DeepCollectionEquality().hash(themeState));
 
   @JsonKey(ignore: true)
   @override
@@ -131,12 +165,16 @@ class _$_AppState implements _AppState {
 }
 
 abstract class _AppState implements AppState {
-  const factory _AppState({@JsonKey() final NavigationState navigationState}) =
-      _$_AppState;
+  const factory _AppState(
+      {@JsonKey() final NavigationState navigationState,
+      @JsonKey() final ThemeState themeState}) = _$_AppState;
 
   @override
   @JsonKey()
   NavigationState get navigationState;
+  @override
+  @JsonKey()
+  ThemeState get themeState;
   @override
   @JsonKey(ignore: true)
   _$$_AppStateCopyWith<_$_AppState> get copyWith =>

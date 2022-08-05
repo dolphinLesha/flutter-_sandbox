@@ -16,7 +16,8 @@ class RouterScreen extends StatelessWidget {
       body: StoreConnector<AppState, Store<AppState>>(
         converter: (store) => store,
         builder: (context, store) {
-          NavigationRoute? navigationRoute = appRoutesMap[store.state.navigationState.currentRoute.runtimeType];
+          NavigationRoute? navigationRoute = appRoutesMap[
+              store.state.navigationState.currentRoute.runtimeType];
 
           if (navigationRoute != null) {
             return BottomBar(

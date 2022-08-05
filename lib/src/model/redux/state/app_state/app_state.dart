@@ -1,3 +1,4 @@
+import 'package:flutter_sandbox/src/model/redux/state/theme_state/theme_state.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../navigation_state/navigation_state.dart';
@@ -11,6 +12,7 @@ enum Status { initial, loading, failure, success }
 class AppState with _$AppState {
   const factory AppState({
     @JsonKey() @Default(NavigationState()) NavigationState navigationState,
+    @JsonKey() @Default(ThemeState()) ThemeState themeState,
   }) = _AppState;
 
 // factory AppState.fromJson(Map<String, dynamic> json) =>

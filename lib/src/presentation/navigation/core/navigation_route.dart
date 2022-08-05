@@ -25,11 +25,11 @@ class NavigationRoute {
   }) {
     return routeValidator != null
         ? routeValidator!(
-      route: routePath,
-      isUserAuthenticated: isUserAuthenticated,
-      defaultAuthRoute: defaultAuthRoute,
-      defaultUnAuthRoute: defaultUnAuthRoute,
-    )
+            route: routePath,
+            isUserAuthenticated: isUserAuthenticated,
+            defaultAuthRoute: defaultAuthRoute,
+            defaultUnAuthRoute: defaultUnAuthRoute,
+          )
         : routePath;
   }
 }

@@ -1,4 +1,3 @@
-import 'package:flutter_sandbox/src/presentation/modules/base/home_screen.dart';
 import 'package:flutter_sandbox/src/presentation/modules/base/navigation/base_routes.dart';
 import 'package:flutter_sandbox/src/presentation/navigation/unknown_route.dart';
 
@@ -24,6 +23,6 @@ List<NavigationRoute> appRouteList = [
 ];
 
 Map<Type, NavigationRoute> appRoutesMap =
-RoutesGenerator.generateRoutesMap(appRouteList);
+    RoutesGenerator.generateRoutesMap(appRouteList);
 Map<String, NavigationRoute> appRoutesMapByLocation =
-RoutesGenerator.generateRoutesMapWithLocationAsKey(appRouteList);
+    RoutesGenerator.generateRoutesMapWithLocationAsKey(appRouteList);

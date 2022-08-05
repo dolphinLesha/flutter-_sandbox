@@ -12,7 +12,7 @@ class AppRouterDelegate extends RouterDelegate<RoutePath>
 
   AppRouterDelegate(this.store) {
     store.onChange.map((state) => state.navigationState).distinct().forEach(
-          (state) {
+      (state) {
         notifyListeners();
       },
     );

@@ -55,19 +55,18 @@ extension AppModulesEnumX on AppModulesEnum {
               ),
             ),
             SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      for (int i=0;i<20;i++)
-                        Text(
-                          'p $i',
-                          style: AT.body2.copyWith(
-                            color: AdditionalColors.background,
-                          ),
-                        ),
-                    ],
-                  ),
-
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  for (int i = 0; i < 20; i++)
+                    Text(
+                      'p $i',
+                      style: AT.body2.copyWith(
+                        color: AdditionalColors.background,
+                      ),
+                    ),
+                ],
+              ),
             ),
           ],
         );

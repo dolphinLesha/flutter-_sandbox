@@ -1,3 +1,3 @@
-abstract class RoutePath{
+abstract class RoutePath {
   const RoutePath();
 }

@@ -10,4 +10,3 @@ void main() async {
     store: DI.store,
   ));
 }
-

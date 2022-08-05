@@ -83,7 +83,8 @@ class CustomTooltip extends StatefulWidget {
   _CustomTooltipState createState() => _CustomTooltipState();
 }
 
-class _CustomTooltipState extends State<CustomTooltip> with TickerProviderStateMixin {
+class _CustomTooltipState extends State<CustomTooltip>
+    with TickerProviderStateMixin {
   final color = AdditionalColors.black;
 
   OverlayEntry? overlayEntry;
@@ -117,9 +118,9 @@ class _CustomTooltipState extends State<CustomTooltip> with TickerProviderStateM
       timer.cancel();
     } catch (e) {}
     timer = Timer(const Duration(milliseconds: 100), () async {
-      // if (!isHoverOnChild && !isHoverOnParent) {
-      //   _expandController.reverse().whenComplete(() => _removeOverlay());
-      // }
+      if (!isHoverOnChild && !isHoverOnParent) {
+        _expandController.reverse().whenComplete(() => _removeOverlay());
+      }
     });
   }
 
@@ -142,9 +143,11 @@ class _CustomTooltipState extends State<CustomTooltip> with TickerProviderStateM
     RenderBox renderBox = context.findRenderObject() as RenderBox;
     var parentSize = renderBox.size;
 
-    ValueNotifier<Size> size = ValueNotifier<Size>(const Size(double.infinity, double.infinity));
+    ValueNotifier<Size> size =
+        ValueNotifier<Size>(const Size(double.infinity, double.infinity));
 
-    final RenderBox? overlay = Navigator.of(context).overlay!.context.findRenderObject() as RenderBox?;
+    final RenderBox? overlay =
+        Navigator.of(context).overlay!.context.findRenderObject() as RenderBox?;
     final Size overlaySize = overlay != null ? overlay.size : Size.zero;
 
     final Offset parentPosition = renderBox.localToGlobal(Offset.zero);
@@ -175,43 +178,59 @@ class _CustomTooltipState extends State<CustomTooltip> with TickerProviderStateM
       }
       switch (direction) {
         case CursorTooltipDirection.leftBottom:
-          double maxWidth = ((widget.maxWidth ?? double.infinity) > childPosition.dx ? childPosition.dx : widget.maxWidth!);
-          double maxHeight = ((widget.maxHeight ?? double.infinity) > overlaySize.height - childPosition.dy
+          double maxWidth =
+              ((widget.maxWidth ?? double.infinity) > childPosition.dx
+                  ? childPosition.dx
+                  : widget.maxWidth!);
+          double maxHeight = ((widget.maxHeight ?? double.infinity) >
+                  overlaySize.height - childPosition.dy
               ? overlaySize.height - childPosition.dy
               : widget.maxHeight!);
           maxSize = Size(maxWidth, maxHeight);
           break;
         case CursorTooltipDirection.leftTop:
-          double maxWidth = ((widget.maxWidth ?? double.infinity) > childPosition.dx ? childPosition.dx : widget.maxWidth!);
-          double maxHeight = ((widget.maxHeight ?? double.infinity) > childPosition.dy
-              ? childPosition.dy
-              : widget.maxHeight!);
+          double maxWidth =
+              ((widget.maxWidth ?? double.infinity) > childPosition.dx
+                  ? childPosition.dx
+                  : widget.maxWidth!);
+          double maxHeight =
+              ((widget.maxHeight ?? double.infinity) > childPosition.dy
+                  ? childPosition.dy
+                  : widget.maxHeight!);
           maxSize = Size(maxWidth, maxHeight);
           break;
         case CursorTooltipDirection.rightBottom:
-          double maxWidth =
-              ((widget.maxWidth ?? double.infinity) > overlaySize.width - childPosition.dx ? overlaySize.width - childPosition.dx : widget.maxWidth!);
-          double maxHeight = ((widget.maxHeight ?? double.infinity) > overlaySize.height - childPosition.dy
+          double maxWidth = ((widget.maxWidth ?? double.infinity) >
+                  overlaySize.width - childPosition.dx
+              ? overlaySize.width - childPosition.dx
+              : widget.maxWidth!);
+          double maxHeight = ((widget.maxHeight ?? double.infinity) >
+                  overlaySize.height - childPosition.dy
               ? overlaySize.height - childPosition.dy
               : widget.maxHeight!);
           maxSize = Size(maxWidth, maxHeight);
           break;
         case CursorTooltipDirection.rightTop:
-          double maxWidth =
-              ((widget.maxWidth ?? double.infinity) > overlaySize.width - childPosition.dx ? overlaySize.width - childPosition.dx : widget.maxWidth!);
-          double maxHeight = ((widget.maxHeight ?? double.infinity) > childPosition.dy
-              ? childPosition.dy
-              : widget.maxHeight!);
+          double maxWidth = ((widget.maxWidth ?? double.infinity) >
+                  overlaySize.width - childPosition.dx
+              ? overlaySize.width - childPosition.dx
+              : widget.maxWidth!);
+          double maxHeight =
+              ((widget.maxHeight ?? double.infinity) > childPosition.dy
+                  ? childPosition.dy
+                  : widget.maxHeight!);
           break;
         case CursorTooltipDirection.free:
           break;
       }
     } else {
-      final center = parentPosition + Offset(parentSize.width / 2, parentSize.height / 2);
+      final center =
+          parentPosition + Offset(parentSize.width / 2, parentSize.height / 2);
       final dx = overlaySize.width - center.dx;
       final dy = overlaySize.height - center.dy;
       if (sideDirection.isFree) {
-        double min = math.min(math.min(dx, dy), math.min(overlaySize.width, overlaySize.height));
+        double min = math.min(
+            math.min(dx, dy), math.min(overlaySize.width, overlaySize.height));
         if (min == dx) {
           sideDirection = SideTooltipDirection.left;
         } else if (min == dy) {
@@ -225,32 +244,50 @@ class _CustomTooltipState extends State<CustomTooltip> with TickerProviderStateM
       switch (sideDirection) {
         case SideTooltipDirection.left:
           childPosition = parentPosition + Offset(0, parentSize.height / 2);
-          double maxWidth = ((widget.maxWidth ?? double.infinity) > childPosition.dx ? childPosition.dx : widget.maxWidth!);
-          double maxHeight = ((widget.maxHeight ?? double.infinity) > (dy < center.dy ? dy * 2 : center.dy * 2)
+          double maxWidth =
+              ((widget.maxWidth ?? double.infinity) > childPosition.dx
+                  ? childPosition.dx
+                  : widget.maxWidth!);
+          double maxHeight = ((widget.maxHeight ?? double.infinity) >
+                  (dy < center.dy ? dy * 2 : center.dy * 2)
               ? (dy < center.dy ? dy * 2 : center.dy * 2)
               : widget.maxHeight!);
           maxSize = Size(maxWidth, maxHeight);
           break;
         case SideTooltipDirection.right:
-          childPosition = parentPosition + Offset(parentSize.width, parentSize.height / 2);
-          double maxWidth = ((widget.maxWidth ?? double.infinity) > overlaySize.width - childPosition.dx ? overlaySize.width - childPosition.dx : widget.maxWidth!);
-          double maxHeight = ((widget.maxHeight ?? double.infinity) > (dy < center.dy ? dy * 2 : center.dy * 2)
+          childPosition =
+              parentPosition + Offset(parentSize.width, parentSize.height / 2);
+          double maxWidth = ((widget.maxWidth ?? double.infinity) >
+                  overlaySize.width - childPosition.dx
+              ? overlaySize.width - childPosition.dx
+              : widget.maxWidth!);
+          double maxHeight = ((widget.maxHeight ?? double.infinity) >
+                  (dy < center.dy ? dy * 2 : center.dy * 2)
               ? (dy < center.dy ? dy * 2 : center.dy * 2)
               : widget.maxHeight!);
           maxSize = Size(maxWidth, maxHeight);
           break;
         case SideTooltipDirection.top:
           childPosition = parentPosition + Offset(parentSize.width / 2, 0);
-          double maxWidth = ((widget.maxWidth ?? double.infinity) > (dx < center.dx ? dx * 2 : center.dx * 2) ? (dx < center.dx ? dx * 2 : center.dx * 2) : widget.maxWidth!);
-          double maxHeight = ((widget.maxHeight ?? double.infinity) > childPosition.dy
-              ? childPosition.dy
-              : widget.maxHeight!);
+          double maxWidth = ((widget.maxWidth ?? double.infinity) >
+                  (dx < center.dx ? dx * 2 : center.dx * 2)
+              ? (dx < center.dx ? dx * 2 : center.dx * 2)
+              : widget.maxWidth!);
+          double maxHeight =
+              ((widget.maxHeight ?? double.infinity) > childPosition.dy
+                  ? childPosition.dy
+                  : widget.maxHeight!);
           maxSize = Size(maxWidth, maxHeight);
           break;
         case SideTooltipDirection.bottom:
-          childPosition = parentPosition + Offset(parentSize.width / 2, parentSize.height);
-          double maxWidth = ((widget.maxWidth ?? double.infinity) > (dx < center.dx ? dx * 2 : center.dx * 2) ? (dx < center.dx ? dx * 2 : center.dx * 2) : widget.maxWidth!);
-          double maxHeight = ((widget.maxHeight ?? double.infinity) > overlaySize.height - childPosition.dy
+          childPosition =
+              parentPosition + Offset(parentSize.width / 2, parentSize.height);
+          double maxWidth = ((widget.maxWidth ?? double.infinity) >
+                  (dx < center.dx ? dx * 2 : center.dx * 2)
+              ? (dx < center.dx ? dx * 2 : center.dx * 2)
+              : widget.maxWidth!);
+          double maxHeight = ((widget.maxHeight ?? double.infinity) >
+                  overlaySize.height - childPosition.dy
               ? overlaySize.height - childPosition.dy
               : widget.maxHeight!);
           maxSize = Size(maxWidth, maxHeight);
@@ -293,7 +330,7 @@ class _CustomTooltipState extends State<CustomTooltip> with TickerProviderStateM
                     Container(
                       constraints: BoxConstraints(
                         maxWidth: maxSize.width,
-                        maxHeight: maxSize.height- 15,
+                        maxHeight: maxSize.height - 15,
                       ),
                       decoration: BoxDecoration(
                         color: color,
@@ -304,7 +341,8 @@ class _CustomTooltipState extends State<CustomTooltip> with TickerProviderStateM
                                   color: Colors.black.withOpacity(0.4),
                                   spreadRadius: 2,
                                   blurRadius: 9,
-                                  offset: const Offset(0, 3), // changes position of shadow
+                                  offset: const Offset(
+                                      0, 3), // changes position of shadow
                                 ),
                               ]
                             : [],
@@ -313,16 +351,16 @@ class _CustomTooltipState extends State<CustomTooltip> with TickerProviderStateM
                       child: content,
                     ),
                     if (appearance.isSide)
-                    ClipPath(
-                      clipper: ArrowClip(),
-                      child: Container(
-                        height: 5,
-                        width: 15,
-                        decoration: BoxDecoration(
-                          color: color,
+                      ClipPath(
+                        clipper: ArrowClip(),
+                        child: Container(
+                          height: 5,
+                          width: 15,
+                          decoration: BoxDecoration(
+                            color: color,
+                          ),
                         ),
                       ),
-                    ),
                   ],
                 ),
               ),
@@ -444,7 +482,8 @@ class _TooltipChildDelegate extends SingleChildLayoutDelegate {
 
   @override
   BoxConstraints getConstraintsForChild(BoxConstraints constraints) {
-    return constraints.copyWith(maxHeight: maxSize.height, maxWidth: maxSize.width);
+    return constraints.copyWith(
+        maxHeight: maxSize.height, maxWidth: maxSize.width);
   }
 
   @override

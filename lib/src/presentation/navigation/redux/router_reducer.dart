@@ -10,5 +10,4 @@ class NavigationReducer {
 
   static AppState _onRouteChanged(AppState state, RouteChanged action) =>
       state.copyWith.navigationState(currentRoute: action.route);
-
 }

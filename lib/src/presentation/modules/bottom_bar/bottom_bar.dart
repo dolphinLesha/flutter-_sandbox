@@ -2,10 +2,14 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_sandbox/di.dart';
 import 'package:flutter_sandbox/src/data/common/enums/app_modules.dart';
+import 'package:flutter_sandbox/src/presentation/common/buttons/clickable_widget.dart';
 import 'package:flutter_sandbox/src/presentation/common/layouts/custom_tooltip.dart';
 import 'package:flutter_sandbox/src/presentation/core/styles/app_colors.dart';
 import 'package:flutter_sandbox/src/presentation/core/styles/app_typography.dart';
+import 'package:flutter_sandbox/src/presentation/core/themes.dart';
+import 'package:flutter_sandbox/src/presentation/redux/theme/theme_actions.dart';
 
 class BottomBar extends StatelessWidget {
   final Widget child;
@@ -19,15 +23,17 @@ class BottomBar extends StatelessWidget {
     if (kIsWeb) {
       return 'Приложение запущено в браузере';
     }
-    if (Platform.isAndroid)
+    if (Platform.isAndroid) {
       return 'Приложение запущено на Android';
-    else if (Platform.isIOS)
+    } else if (Platform.isIOS) {
       return 'Приложение запущено на IOS';
-    else if (Platform.isLinux)
+    } else if (Platform.isLinux) {
       return 'Приложение запущено на Linux';
-    else if (Platform.isMacOS)
+    } else if (Platform.isMacOS) {
       return 'Приложение запущено на MacOS';
-    else if (Platform.isWindows) return 'Приложение запущено на Windows';
+    } else if (Platform.isWindows) {
+      return 'Приложение запущено на Windows';
+    }
     return 'Неизвестно, где запущено приложение';
   }
 
@@ -46,20 +52,42 @@ class BottomBar extends StatelessWidget {
           flex: 0,
           child: DecoratedBox(
             decoration: const BoxDecoration(
-              color: AdditionalColors.semiLightGrey,
+              color: AdditionalColors.background,
             ),
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Icon(
-                    Icons.menu,
-                    color: AdditionalColors.black,
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.menu,
+                        color: AdditionalColors.black,
+                      ),
+                      ClickableWidget(
+                        onTap: () {
+                          DI.store.dispatch(ThemeChanged(theme: brightTheme));
+                        },
+                        child: Icon(
+                          Icons.sunny,
+                          color: Theme.of(context).primaryColor,
+                        ),
+                      ),
+                      ClickableWidget(
+                        onTap: () {
+                          DI.store.dispatch(ThemeChanged(theme: darkTheme));
+                        },
+                        child: const Icon(
+                          Icons.sunny,
+                          color: AdditionalColors.black,
+                        ),
+                      ),
+                    ],
                   ),
-                  _ModulesTabPanel(),
+                  const _ModulesTabPanel(),
                   Text(
-                    '${platformText}',
+                    platformText,
                     style: AT.body3,
                   ),
                 ],
@@ -149,12 +177,8 @@ class _IconModuleButtonState extends State<_IconModuleButton> {
       width: 32,
       height: 32,
       child: MouseRegion(
-        onEnter: (e) {
-
-        },
-        onExit: (e) {
-
-        },
+        onEnter: (e) {},
+        onExit: (e) {},
         child: GestureDetector(
           onTap: () {},
           child: CustomTooltip(
@@ -166,7 +190,9 @@ class _IconModuleButtonState extends State<_IconModuleButton> {
             padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
             child: Icon(
               icon,
-              color: widget.selected ? AdditionalColors.lightGrey : AdditionalColors.black,
+              color: widget.selected
+                  ? AdditionalColors.lightGrey
+                  : AdditionalColors.black,
               size: 28,
             ),
           ),
